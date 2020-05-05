@@ -1,0 +1,5 @@
+Artículos inteserantes
+
+- Función pi(x) calculada a orden O(x^(1/2+\epsilon)): https://arxiv.org/pdf/2002.12797.pdf
+- Artículo de la función L de Dirichlet (hay que entender esta función plenamente) https://arxiv.org/pdf/2002.08903.pdf
+- No creo que use este artículo, pero está interesante. Habla de conexiones entre la conjetura 1-2-3 y la teoría de números. Además trae algunos problemas sin resolver https://arxiv.org/pdf/2003.02887.pdf
