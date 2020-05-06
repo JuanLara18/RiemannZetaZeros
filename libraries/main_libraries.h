@@ -4,6 +4,7 @@
 #include <boost/math/special_functions/bernoulli.hpp>
 
 using namespace std::complex_literals;
+const double PI = std::atan(1.0)*4;
 
 std::complex<double> semi_factorial(std::complex<double> a,
   int b){
@@ -74,4 +75,20 @@ std::complex<double> riemann_zeta(std::complex<double> s, int nu = 15){
       << " change N and nu of the riemann_zeta function" <<std::endl;
   }
   return zeta;
+}
+
+std::complex<double> theta(double t){
+  /* This function calculates e^{i*theta(t)}, needed to find the sign of the
+  function Z(t), that is required to identify the zeros of the zeta riemann
+  function.
+
+  The error of this approximation is at most 64/(63t^5)
+  Input:
+    - t: double.
+  Output:
+    - res: complex number.
+  */
+  std::complex<double> res = std::exp(std::complex<double>(0,1)*
+    (t*std::log(t/2/PI)/2-t/2-PI/8+1/48/PI+7/5760/pow(t,3)));
+  return res;
 }
