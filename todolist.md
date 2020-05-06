@@ -16,7 +16,14 @@
             $$
 
          - [ ] Implement a function to find the Bernoulli numbers.
-           - For this I used a library called boost. You can get it through https://www.boost.org/users/download/.
+
+           - For this I used a library called boost. You can get it through https://www.boost.org/users/download/. To compile a script using this library use 
+
+             ```bash
+             g++ -I boost_1_73_0/ test.cpp -o name
+             ```
+
+             having in mind that the library *boost_1_73_0/* is in the same place than the file that you are compiling. *test.cpp* and *name* must be replaced depending of the case.
 
        - [ ] Implement in Python the way of interacting with the user.
 
