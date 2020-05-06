@@ -1,5 +1,6 @@
 #include <complex>
 #include <cmath>
+#include <boost/math/special_functions/bernoulli.hpp>
 
 using namespace std::complex_literals;
 
@@ -17,5 +18,17 @@ std::complex<double> semi_factorial(std::complex<double> a,
     std::complex<double> mult(real(a)+ii, imag(a));
     res = res*mult;
   }
+  return res;
+}
+
+std::vector<float> bernoulli_numbers(int n){
+  /* This function calculates the first n even Bernoulli numbers.
+  Input:
+    - n: integer
+  Output:
+    - res: vector
+  */
+  std::vector<float> res;
+  boost::math::bernoulli_b2n<float>(0, n, std::back_inserter(res));
   return res;
 }
