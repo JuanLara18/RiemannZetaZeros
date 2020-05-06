@@ -3,10 +3,28 @@
 - [ ] Studies.
    - [ ] Study the ways of determine the roots over the critical line (**Edwards H.M. Riemann Zeta Function* page 119...).
    - [ ] Get the way to parallelize the program using KUDA (maybe...).
+
  - [ ] Program.
+
     - [ ] Implement the way to determine how many roots and which are in a given interval.
+
        - [ ] Implement in C++ the calculation of this.
+
+          - [x] Implement the function `semi_factorial`, which calculates the value
+            $$
+            a\times(a+1)\times\cdots\times (a+b), \text{ for } a\in\mathbb{C} \text{ and }b\in\mathbb{N}.
+            $$
+
+         - [ ] Implement a function to find the Bernoulli numbers.
+           - For this I used a library called boost. You can get it through https://www.boost.org/users/download/.
+
        - [ ] Implement in Python the way of interacting with the user.
+
+ - [ ] Readme.
+
+    - [ ] Installation of required libraries.
+       - [x] Construct the documentation to explain how to install boost.
+    - [ ] Explain how to make the program works.
 
 
 
