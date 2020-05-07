@@ -1,8 +1,10 @@
 # Calculation of the Zeros of the Riemann Zeta Function
 
-## Install
+This program can calculate the number of non-trivial roots of the Riemann Zeta Function for a given imaginary interval [a,b].
 
-To get the repository:
+## Installation
+
+To get the repository type in a terminal
 
 ```bash
 git clone https://github.com/julian20250/Practice.git
