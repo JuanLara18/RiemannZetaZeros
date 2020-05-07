@@ -93,6 +93,24 @@ std::complex<double> theta(double t){
   return result;
 }
 
+int get_sign(double t){
+  /* This function calculates the sign of t.
+  Input:
+    - t: double.
+  Output:
+    - sign: -1,1,0 (integer).
+
+  */
+  int sign;
+  if (t == 0.0){
+    sign = 0;
+  }
+  else{
+    sign = t/abs(t);
+  }
+  return sign;
+}
+
 int sign_Z(double t){
   /* This is the Z function, that receives a double t as argument. The sign of
   this function is the opposite sign of xi(1/2+it) (Riemann Zeta Function removing
@@ -102,14 +120,53 @@ int sign_Z(double t){
   Output:
     - sign: -1,1,0 (integer).
   */
-  std::complex<double> temporal = theta(t)*riemann_zeta(std::complex<double>(1/2.,t));
+  std::complex<double> temporal = theta(1.*t)*riemann_zeta(std::complex<double>(1/2.,1.*t));
   double real_part = std::real(temporal);
-  int sign;
-  if (real_part == 0){
-    sign = 0;
+  //std::cout << get_sign(real_part) << std::endl;
+  return get_sign(real_part);
+}
+
+int number_roots(double a, double b, double prec = 0.01){
+  /* This function tries to find the roots in the interval [a,b] using a given
+  precission prec. If the roots are nearer than prec, the function will have
+  problems to find them.
+  Input:
+    - a: double.
+    - b: double.
+    - prec: double.
+  Output:
+    - number: integer.
+  */
+  if (a == 0.0){
+    a = 0.1;
   }
-  else{
-    sign = real_part/abs(real_part);
+  int steps = (b-a)/prec;
+  int number = 0;
+  if (((b-a)/prec - steps) != 0.0){
+    steps++;
   }
-  return sign;
+  steps++;
+  int last_sign = sign_Z(a);
+  if (last_sign == 0){
+    number++;
+  }
+  int tmp_sign;
+  for(int ii = 1; ii<(steps-1); ii++){
+    tmp_sign = sign_Z(a + ii*prec);
+    if (tmp_sign == 0){
+      number++;
+    }
+    if ((last_sign != tmp_sign) && (tmp_sign != 0) && (last_sign != 0)){
+      number++;
+    }
+    last_sign = tmp_sign;
+  }
+  tmp_sign = sign_Z(b);
+  if (tmp_sign == 0){
+    number++;
+  }
+  if ((last_sign != tmp_sign) && (tmp_sign != 0) && (last_sign != 0)){
+    number++;
+  }
+  return number;
 }
