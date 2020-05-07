@@ -35,7 +35,7 @@ std::vector<float> bernoulli_numbers(int n){
   return res;
 }
 
-std::complex<double> riemann_zeta(std::complex<double> s, int nu = 15){
+std::complex<double> riemann_zeta(std::complex<double> s, int nu = 8){
   /* This function calculates the value of the Riemann Zeta Function in s,
   using the parameters N and nu for the approximation of the Euler's Summation
   Method.
@@ -47,7 +47,7 @@ std::complex<double> riemann_zeta(std::complex<double> s, int nu = 15){
   */
   int N;
   // Empiric bound
-  if (abs(s)<10){
+  if (abs(s)<50){
     N = 1000;
   }
   else{
@@ -58,13 +58,13 @@ std::complex<double> riemann_zeta(std::complex<double> s, int nu = 15){
   for (int ii =1; ii<N; ii++){
     zeta = zeta + pow(ii, -s);
   }
-  zeta = zeta + pow(N, std::complex<double>(1,0)-s)/(s-std::complex<double>(1,0))
-  +pow(N,-s)/std::complex<double>(2,0);
+  zeta = zeta + pow(N, std::complex<double>(1.,0)-s)/(s-std::complex<double>(1.,0))
+  +pow(N,-s)/std::complex<double>(2.,0);
 
   std::vector<float> bn = bernoulli_numbers(nu+1);
   for (int ii = 1; ii<(nu+1); ii++){
     zeta = zeta + std::complex<double>(bn[ii],0)*semi_factorial(s,2*(ii-1))*
-    pow(N, -s-std::complex<double>(2*ii-1,0))/semi_factorial(std::complex<double>(1,0), 2*ii-1);
+    pow(N, -s-std::complex<double>(2*ii-1,0))/semi_factorial(std::complex<double>(1.,0), 2*ii-1);
   }
   // This is the error in the approximation
   double error = abs(semi_factorial(s,2*nu-1)*std::complex<double>(bn[nu],0)*
@@ -86,9 +86,30 @@ std::complex<double> theta(double t){
   Input:
     - t: double.
   Output:
-    - res: complex number.
+    - result: complex number.
   */
-  std::complex<double> res = std::exp(std::complex<double>(0,1)*
-    (t*std::log(t/2/PI)/2-t/2-PI/8+1/48/PI+7/5760/pow(t,3)));
-  return res;
+  double tmp = (t*std::log(t/2/PI)/2.-t/2-PI/8+1/48./t+7./5760./pow(t,3));
+  std::complex<double> result(cos(tmp),sin(tmp));
+  return result;
+}
+
+int sign_Z(double t){
+  /* This is the Z function, that receives a double t as argument. The sign of
+  this function is the opposite sign of xi(1/2+it) (Riemann Zeta Function removing
+  all the poles).
+  Input:
+    - t: double.
+  Output:
+    - sign: -1,1,0 (integer).
+  */
+  std::complex<double> temporal = theta(t)*riemann_zeta(std::complex<double>(1/2.,t));
+  double real_part = std::real(temporal);
+  int sign;
+  if (real_part == 0){
+    sign = 0;
+  }
+  else{
+    sign = real_part/abs(real_part);
+  }
+  return sign;
 }
