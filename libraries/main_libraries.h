@@ -224,3 +224,41 @@ std::vector<float> find_roots(double a, double b, bool find = 0,
   }
   return result;
 }
+
+std::vector<float> nm_roots(int n, int m, double prec = 0.01,
+   double error = 0.001){
+  /* This function determines from the n-th root to the m-th root of the Riemann
+  Zeta Function. The intervals where the presence of the roots is going to be
+  examined are of lenght prec, and the maximum error in the roots is given by
+  the parameter error.
+  Input:
+    - n: integer.
+    - m: integer.
+    - prec: double (default = 0.01).
+    - error: double (default = 0.001).
+  Output:
+    -result: vector.
+  */
+  std::vector<float> result;
+  int number = 0;
+  double start = 0.1;
+  double end = start + prec;
+  while (number < m) {
+    if ((sign_Z(start) == 0)){
+      if (number >=(n-1)){
+        result.push_back(start);
+      }
+      number++;
+    }
+    if ((sign_Z(start) != sign_Z(end)) && (sign_Z(start)!=0) &&
+    (sign_Z(end)!=0) ){
+      if (number >=(n-1)){
+        result.push_back(bisection(start, end, error));
+      }
+      number++;
+    }
+    start = end;
+    end = end + prec;
+  }
+  return result;
+}
