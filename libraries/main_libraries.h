@@ -126,47 +126,101 @@ int sign_Z(double t){
   return get_sign(real_part);
 }
 
-int number_roots(double a, double b, double prec = 0.01){
-  /* This function tries to find the roots in the interval [a,b] using a given
-  precission prec. If the roots are nearer than prec, the function will have
-  problems to find them.
+double bisection(double a, double b, double error){
+  /* This function finds the exact imaginary part of the root in the interval
+  (a,b), with a maximum error given by the variable error.
   Input:
     - a: double.
     - b: double.
-    - prec: double.
+    - error: double.
   Output:
-    - number: integer.
+    - root: double.
   */
+  double point1 = a;
+  double point2 = (a+b)/2;
+  double point3 = b;
+
+  while (((point2-point1) >error) && ((point3 - point2) > error)) {
+    if (sign_Z(point1) != sign_Z(point2)){
+      point3 = point2;
+      point2 = (point1+point2)/2;
+    }else{
+      point1 = point2;
+      point2 = (point2+point3)/2;
+    }
+  }
+  return point2;
+}
+
+std::vector<float> find_roots(double a, double b, bool find = 0,
+  double prec = 0.01, double error = 0.001){
+  /* This function tries to find the roots in the interval [a,b] using a given
+  precission prec. If the roots are nearer than prec, the function will have
+  problems to find them.
+
+  There are two possible functions for this method. if find = 0, this
+  function is going to calculate how many roots are in the interval, and if
+  find_ = 1, the method is going to find explicitly the roots via bisection
+  with precission error.
+
+  Input:
+    - a: double.
+    - b: double.
+    - find: bool (default = 0).
+    - prec: double (default = 0.01).
+    - error: double (default =0.01).
+  Output:
+    - result: vector (with 1 component if find=0, and n+1 components if find=1,
+              where the first component is the number of roots and the following
+              components are the imaginary part of all roots found).
+  */
+  std::vector<float> result;
+  result.push_back(0);
+
   if (a == 0.0){
     a = 0.1;
   }
   int steps = (b-a)/prec;
-  int number = 0;
   if (((b-a)/prec - steps) != 0.0){
     steps++;
   }
   steps++;
   int last_sign = sign_Z(a);
   if (last_sign == 0){
-    number++;
+    result[0]++;
+    if (find){
+      result.push_back(a);
+    }
   }
   int tmp_sign;
   for(int ii = 1; ii<(steps-1); ii++){
     tmp_sign = sign_Z(a + ii*prec);
     if (tmp_sign == 0){
-      number++;
+      result[0]++;
+      if (find){
+        result.push_back(a + ii*prec);
+      }
     }
     if ((last_sign != tmp_sign) && (tmp_sign != 0) && (last_sign != 0)){
-      number++;
+      result[0]++;
+      if (find){
+        result.push_back(bisection(a + (ii-1)*prec, a + ii*prec, error));
+      }
     }
     last_sign = tmp_sign;
   }
   tmp_sign = sign_Z(b);
   if (tmp_sign == 0){
-    number++;
+    result[0]++;
+    if (find){
+      result.push_back(b);
+    }
   }
   if ((last_sign != tmp_sign) && (tmp_sign != 0) && (last_sign != 0)){
-    number++;
+    result[0]++;
+    if (find){
+      result.push_back(bisection(a + (steps-2)*prec,b,error));
+    }
   }
-  return number;
+  return result;
 }
