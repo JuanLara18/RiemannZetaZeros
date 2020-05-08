@@ -28,14 +28,16 @@
          - [x] Implement a function to approximate the Riemann Zeta Function using the Euler's Summation Formula.
 
            - [x] Design an intelligent condition to get the N value given the parameter s to avoid failures in the approximation.
-        
+       
          - [x] Construct the function theta that appears in the complex exponential to determine the sign of Z(t).
        
          - [x] Construct the function Z(t).
        
          - [x] Construct the function to find the number of roots in a given interval [a,b].
        
-         - [ ] Construct the function to find the exact value of the roots in a given interval [a,b].
+         - [x] Construct the function to find the exact value of the roots in a given interval [a,b] (this has become the same function than the last one).
+       
+         - [x] Construct a function that finds the n-th root. In fact, the function nm_roots return from the n-th root to the m-th root.
        
        - [ ] Improvement of parts of the code.
        
