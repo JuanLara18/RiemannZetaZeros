@@ -2,7 +2,7 @@
 
 - [ ] Studies.
    - [x] Study the ways of determine the roots over the critical line (**Edwards H.M. Riemann Zeta Function* page 119...).
-   - [ ] Get the way to parallelize the program using KUDA (maybe...).
+   - [x] Get the way to parallelize the program using KUDA (maybe...). I actually made the parallelization using Python.
 
  - [ ] Program.
 
@@ -28,24 +28,26 @@
          - [x] Implement a function to approximate the Riemann Zeta Function using the Euler's Summation Formula.
 
            - [x] Design an intelligent condition to get the N value given the parameter s to avoid failures in the approximation.
-       
+
          - [x] Construct the function theta that appears in the complex exponential to determine the sign of Z(t).
-       
+
          - [x] Construct the function Z(t).
-       
+
          - [x] Construct the function to find the number of roots in a given interval [a,b].
-       
+
          - [x] Construct the function to find the exact value of the roots in a given interval [a,b] (this has become the same function than the last one).
-       
+
          - [x] Construct a function that finds the n-th root. In fact, the function nm_roots return from the n-th root to the m-th root.
-       
+
        - [ ] Improvement of parts of the code.
-       
+
           - [ ] In the function number_roots, if one knows what is the minimum distance between two roots, the code can be improved changing the *prec* parameter.
-       
+
        - [ ] Implement in Python the way of interacting with the user.
-       
-       - [ ] Parallelize the way of finding the roots in a given interval. Maybe you should divide the interval in n parts, where n is the number of dedicated nuclei.
+
+       - [x] Parallelize the way of finding the roots in a given interval. Maybe you should divide the interval in n parts, where n is the number of dedicated nuclei.
+
+       - [ ] Try to improve the parallelization, because the last nucleis (the ones that are farther from zero) take more time than the nearer ones.
 
  - [ ] Readme.
 
