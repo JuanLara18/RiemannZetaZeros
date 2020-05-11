@@ -73,10 +73,12 @@
        - [x] Construct the documentation to explain how to install boost.
        - [x] Construct the documentation to explain how to install kivy (unneeded).
        - [x] Construct the documentation to explain how to install xclip (unneeded).
-       - [ ] Construct the documentation to install `click`.
+       - [x] Construct the documentation to install `click`.
     - [ ] Explain how to make the program works.
        - [ ] Explain the mathematics behind this program (maybe in a pdf).
        - [ ] Explain how to use the program.
+          - [x] Write the documentation of the program.
+          - [ ] Wait for some beta testers to tell you some improvements.
 
 
 
