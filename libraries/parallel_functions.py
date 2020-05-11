@@ -16,7 +16,7 @@ def call_findroots(start, end, find, prec, error, n):
     Output:
         - void. (it writes in a .txt file)
     """
-    order = "g++ -I boost_1_73_0/ find_roots.cpp -o a%i.out && "%n
+    order = "g++ -I libraries/boost_1_73_0/ libraries/find_roots.cpp -o a%i.out && "%n
     order += "./a%i.out %f %f %i %f %f"%(n,start, end, find, prec, error)
     order += " > tmp/%i.txt"%n
     os.system(order)
@@ -84,7 +84,7 @@ def call_nmroots(n, m, prec = 0.01, error = 0.001):
     except:
         pass
     os.mkdir("tmp")
-    order = "g++ -I boost_1_73_0/ nm_roots.cpp -o a.out && "
+    order = "g++ -I libraries/boost_1_73_0/ libraries/nm_roots.cpp -o a.out && "
     order += "./a.out %i %i %f %f"%(n,m, prec, error)
     order += " > tmp/res.txt"
     os.system(order)
