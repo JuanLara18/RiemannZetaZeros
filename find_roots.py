@@ -20,7 +20,7 @@ def main(a,b,roots,prec,error,cores):
 
     B is the upper bound of the imaginary interval (must be a float geq A).
 
-    ROOTS is a boolean that specifies if the roots are going to be calculed (default_value=False) (must be True or False).
+    ROOTS is a boolean that specifies if the roots are going to be calculated (default_value=False) (must be True or False).
 
     CORES is the number of cores that are going to be used (default=1) (must be a non-negative integer).
 
@@ -29,12 +29,14 @@ def main(a,b,roots,prec,error,cores):
     ERROR is the maximum error in the approximation of the roots. Only works when ROOTS=True (default_value=0.001) (must be a float geq 0).
 
     """
-#find = 0, prec =0.01, error = 0.001, nuclei=1
+
     if (roots):
         roots=1
     else:
         roots=0
-    print(finding_roots(float(a),float(b), roots, prec, error, cores))
+    res = finding_roots(float(a),float(b), roots, prec, error, cores)
+    for ii in res:
+        print(ii, end=" ")
 
 if __name__ == "__main__":
     main()

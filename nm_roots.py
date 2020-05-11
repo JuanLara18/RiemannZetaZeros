@@ -23,8 +23,10 @@ def main(n,m,prec,error):
     ERROR is the maximum error in the approximation of the roots (default_value=0.001) (must be a float geq 0).
 
     """
-#find = 0, prec =0.01, error = 0.001, nuclei=1
-    print(call_nmroots(int(n),int(m), prec, error))
+
+    res = call_nmroots(int(n),int(m), prec, error)
+    for ii in res:
+        print(ii, end=" ")
 
 if __name__ == "__main__":
     main()
