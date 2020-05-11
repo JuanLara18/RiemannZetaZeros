@@ -35,8 +35,11 @@ def main(a,b,roots,prec,error,cores):
     else:
         roots=0
     res = finding_roots(float(a),float(b), roots, prec, error, cores)
-    for ii in res:
-        print(ii, end=" ")
+    try:
+        for ii in res:
+            print(ii, end=" ")
+    except:
+        print(res)
 
 if __name__ == "__main__":
     main()

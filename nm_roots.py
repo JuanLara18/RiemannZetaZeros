@@ -25,8 +25,11 @@ def main(n,m,prec,error):
     """
 
     res = call_nmroots(int(n),int(m), prec, error)
-    for ii in res:
-        print(ii, end=" ")
+    try:
+        for ii in res:
+            print(ii, end=" ")
+    except:
+        print(res)
 
 if __name__ == "__main__":
     main()
