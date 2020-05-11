@@ -7,7 +7,7 @@ This program can calculate the number of non-trivial roots of the Riemann Zeta F
 To get the repository type in a terminal
 
 ```bash
-git clone https://github.com/julian20250/Practice.git
+git clone https://github.com/julian20250/RiemannZetaZeros.git
 ```
 
 ### Needed Libraries
@@ -39,4 +39,6 @@ python nm_roots.py --help
 ```
 
  `find_roots.py` finds the number of roots with imaginary part in a given interval [a,b] and `nm_roots.py` prints a list with the imaginary part from the n-th root to the m-th root. The first script can be parallelized in order to increase the execution speed. For more information refer to the documentation of each script.
+
+Don't be alarmed if the execution of these scripts creates directories or `.out` files. They'll be removed after the execution of these scripts. If the script is stopped, these files won't be erased, but they won't prevent the execution of the scripts, so you don't need to manually remove them to avoid problems. 
 
