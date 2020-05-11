@@ -45,15 +45,33 @@
 
        - [ ] Implement in Python the way of interacting with the user.
 
+          - [x] Read the documentation of `npyscreen` in order to make the graphical interface of the program.
+
+             I dediced that this library is not adequate because of its lack of documentation.
+
+          - [x] Read the documentation of `kivy` in order to make the graphical interface of the program.
+
+            You have to install xclip. `sudo apt-get install xclip`.
+
+          - [ ] I think that the `kivy` interface is not as good as I thought, because it gets lagged and exploits when the program takes so long, so I will make a simple interface in the terminal.
+
+          - [x] Communicate the graphical interface to the `main_libraries.py` script.
+
+            - [x] Implement finding_roots in the graphical interface.
+              - [x] Save the output of this function in a .txt.
+            - [x] Create a new function in  `parallel_functions.py` to execute in the graphical interface the method from c++ dedicated to find from the n-th root to the n-th root.
+
        - [x] Parallelize the way of finding the roots in a given interval. Maybe you should divide the interval in n parts, where n is the number of dedicated nuclei.
 
-       - [ ] Try to improve the parallelization, because the last nucleis (the ones that are farther from zero) take more time than the nearer ones.
+       - [ ] Try to improve the parallelization, because the last cores (the ones that are farther from zero) take more time than the nearer ones.
 
  - [ ] Readme.
 
     - [ ] Installation of required libraries.
        - [x] Construct the documentation to explain how to install boost.
-    - [ ] Explain how to make the program works.
+       - [ ] Construct the documentation to explain how to install kivy.
+       - [ ] Construct the documentation to explain how to install xclip.
+    - [ ] Explain how to make the program works, maybe you should write a pdf.
 
 
 
