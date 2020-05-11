@@ -16,7 +16,7 @@ def call_findroots(start, end, find, prec, error, n):
     Output:
         - void. (it writes in a .txt file)
     """
-    order = "g++ -I boost_1_73_0/ find_roots.cpp -o ./a%i.out && "%n
+    order = "g++ -I boost_1_73_0/ find_roots.cpp -o a%i.out && "%n
     order += "./a%i.out %f %f %i %f %f"%(n,start, end, find, prec, error)
     order += " > tmp/%i.txt"%n
     os.system(order)
@@ -38,6 +38,10 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
         Output:
             - result: integer or array, depending of the variable find.
     """
+    try:
+        os.system("rm -rf tmp/")
+    except:
+        pass
     os.mkdir("tmp")
     step = (end-start)/nuclei
     P = [Process(target = call_findroots, args = (start+ii*step, start+(ii+1)*step,\
@@ -57,8 +61,35 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
             number += data[0]
             result.append(data[1:])
         else:
-            number += data            
+            number += data
     os.system("rm -rf tmp/")
     if find == 1:
         return np.hstack(tuple(result))
     return number
+
+def call_nmroots(n, m, prec = 0.01, error = 0.001):
+    """
+        This function calls the function nm_roots, and writes the output in a
+        .txt file.
+        Input:
+            - n: int.
+            - m: int.
+            - prec: float.
+            - error: float.
+        Output:
+            - void. (it writes in a .txt file)
+    """
+    try:
+        os.system("rm -rf tmp/")
+    except:
+        pass
+    os.mkdir("tmp")
+    order = "g++ -I boost_1_73_0/ nm_roots.cpp -o a.out && "
+    order += "./a.out %i %i %f %f"%(n,m, prec, error)
+    order += " > tmp/res.txt"
+    os.system(order)
+    data = np.loadtxt("tmp/res.txt")
+    os.system("rm a.out")
+    os.system("rm -rf tmp/")
+
+    return data
