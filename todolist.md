@@ -1,6 +1,6 @@
 # To Do List
 
-- [ ] Studies.
+- [x] Studies.
    - [x] Study the ways of determine the roots over the critical line (**Edwards H.M. Riemann Zeta Function* page 119...).
    - [x] Get the way to parallelize the program using KUDA (maybe...). I actually made the parallelization using Python.
 
@@ -8,7 +8,7 @@
 
     - [ ] Implement the way to determine how many roots and which are in a given interval.
 
-       - [ ] Implement in C++ the calculation of this.
+       - [x] Implement in C++ the calculation of this.
 
          - [x] Implement the function `semi_factorial`, which calculates the value
            $$
@@ -43,7 +43,7 @@
 
           - [ ] In the function number_roots, if one knows what is the minimum distance between two roots, the code can be improved changing the *prec* parameter.
 
-       - [ ] Implement in Python the way of interacting with the user.
+       - [x] Implement in Python the way of interacting with the user.
 
           - [x] Read the documentation of `npyscreen` in order to make the graphical interface of the program.
 
@@ -53,7 +53,9 @@
 
             You have to install xclip. `sudo apt-get install xclip`.
 
-          - [ ] I think that the `kivy` interface is not as good as I thought, because it gets lagged and exploits when the program takes so long, so I will make a simple interface in the terminal.
+          - [x] I think that the `kivy` interface is not as good as I thought, because it gets lagged and exploits when the program takes so long, so I will make a simple interface in the terminal.
+
+          - [x] Construct a simple way to interact with the user using `click`.
 
           - [x] Communicate the graphical interface to the `main_libraries.py` script.
 
@@ -69,9 +71,12 @@
 
     - [ ] Installation of required libraries.
        - [x] Construct the documentation to explain how to install boost.
-       - [ ] Construct the documentation to explain how to install kivy.
-       - [ ] Construct the documentation to explain how to install xclip.
-    - [ ] Explain how to make the program works, maybe you should write a pdf.
+       - [x] Construct the documentation to explain how to install kivy (unneeded).
+       - [x] Construct the documentation to explain how to install xclip (unneeded).
+       - [ ] Construct the documentation to install `click`.
+    - [ ] Explain how to make the program works.
+       - [ ] Explain the mathematics behind this program (maybe in a pdf).
+       - [ ] Explain how to use the program.
 
 
 
