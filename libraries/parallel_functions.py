@@ -1,3 +1,4 @@
+from __future__ import print_function
 from multiprocessing import Process
 import os
 import numpy as np
@@ -89,6 +90,8 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
     os.system("rm -rf tmp/")
     if find == 1:
         return np.hstack(tuple(result))
+    if not(not(T)):
+        print("WARNING: The following number isn't probably the number of roots in the desired interval since you stopped the program")
     return number
 
 def call_nmroots(n, m, prec = 0.01, error = 0.001):
