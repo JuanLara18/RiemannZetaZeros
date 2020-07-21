@@ -75,7 +75,7 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
             number += data[0]
             result.append(data[1:])
         else:
-            number += data
+            number += sum(data)
     os.system("rm -rf tmp/")
     if find == 1:
         return np.hstack(tuple(result))
