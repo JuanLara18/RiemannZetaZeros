@@ -25,6 +25,8 @@ def call_findroots(start, end, find, prec, error, n, maxRun=100):
         while count < end:
             count += maxRun
             intervals.insert(-1, count)
+    if intervals[-1] == intervals[-2]:
+        intervals.pop(-1)
     for ii in range(1, len(intervals)):
         order = "g++ -I libraries/boost_1_73_0/ libraries/find_roots.cpp -o a%i.out && "%n
         order += "./a%i.out %f %f %i %f %f"%(n, intervals[ii-1], intervals[ii], find, prec, error)
@@ -70,12 +72,18 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
     number = 0
 
     for ii, f in enumerate(files):
-        data = np.loadtxt("tmp/"+f)
+        File = open("tmp/"+f, "r")
+        data = File.readlines()
+        print(data)
+        File.close()
+
+        data = [jj.split(" ") for jj in data]
+        data = [[float(kk) for kk in jj] for jj in data]
+
+        number += sum([jj[0] for jj in data])
         if find == 1:
-            number += data[0]
-            result.append(data[1:])
-        else:
-            number += sum(data)
+            for jj in data:
+                result.append(jj[1:])
     os.system("rm -rf tmp/")
     if find == 1:
         return np.hstack(tuple(result))
