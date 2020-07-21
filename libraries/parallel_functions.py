@@ -56,10 +56,14 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
     step = (end-start)/nuclei
     P = [Process(target = call_findroots, args = (start+ii*step, start+(ii+1)*step,\
     find, prec, error, ii+1)) for ii in range(nuclei)]
-    for ii in P:
-        ii.start()
-    for ii in P:
-        ii.join()
+    try:
+        for ii in P:
+            ii.start()
+        for ii in P:
+            ii.join()
+    except KeyboardInterrupt:
+        for ii in P:
+            ii.terminate()
 
     files = sorted([f for f in os.listdir("tmp/") if os.path.isfile(os.path.join("tmp/", f))])
     result = []
