@@ -2,7 +2,7 @@ from multiprocessing import Process
 import os
 import numpy as np
 
-def call_findroots(start, end, find, prec, error, n):
+def call_findroots(start, end, find, prec, error, n, maxRun=100):
     """
     This function calls the function find_root for each nuclei, and writes the
     output in a .txt file.
@@ -13,14 +13,24 @@ def call_findroots(start, end, find, prec, error, n):
         - prec: double.
         - error: double.
         - n: integer.
+        - maxRun: integer (default=100). Longest interval to be executed per
+            run.
     Output:
         - void. (it writes in a .txt file)
     """
-    order = "g++ -I libraries/boost_1_73_0/ libraries/find_roots.cpp -o a%i.out && "%n
-    order += "./a%i.out %f %f %i %f %f"%(n,start, end, find, prec, error)
-    order += " > tmp/%i.txt"%n
-    os.system(order)
-    os.system("rm a%i.out"%n)
+    
+    intervals = [start, end]
+    if (end-start)>maxRun:
+        count = start
+        while count < end:
+            count += maxRun
+            intervals.insert(-1, count)
+    for ii in range(1, len(intervals)):
+        order = "g++ -I libraries/boost_1_73_0/ libraries/find_roots.cpp -o a%i.out && "%n
+        order += "./a%i.out %f %f %i %f %f"%(n, intervals[ii-1], intervals[ii], find, prec, error)
+        order += " >> tmp/%i.txt"%n
+        os.system(order)
+        os.system("rm a%i.out"%n)
 
 def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
     """
