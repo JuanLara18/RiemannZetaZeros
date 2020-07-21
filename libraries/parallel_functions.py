@@ -58,6 +58,8 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
     step = (end-start)/nuclei
     P = [Process(target = call_findroots, args = (start+ii*step, start+(ii+1)*step,\
     find, prec, error, ii+1)) for ii in range(nuclei)]
+    print("Started Parallel mode...", end =" ")
+    T = []
     try:
         for ii in P:
             ii.start()
@@ -66,7 +68,8 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
     except KeyboardInterrupt:
         for ii in P:
             ii.terminate()
-
+        T=[-1]
+    print(" Ended Parallel mode")
     files = sorted([f for f in os.listdir("tmp/") if os.path.isfile(os.path.join("tmp/", f))])
     result = []
     number = 0
@@ -74,7 +77,6 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
     for ii, f in enumerate(files):
         File = open("tmp/"+f, "r")
         data = File.readlines()
-        print(data)
         File.close()
 
         data = [jj.split(" ") for jj in data]
@@ -83,7 +85,7 @@ def finding_roots(start, end, find = 0, prec =0.01, error = 0.001, nuclei=1):
         number += sum([jj[0] for jj in data])
         if find == 1:
             for jj in data:
-                result.append(jj[1:])
+                result.append(jj[1:]+T)
     os.system("rm -rf tmp/")
     if find == 1:
         return np.hstack(tuple(result))
