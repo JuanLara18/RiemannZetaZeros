@@ -17,8 +17,13 @@ int main(int argc, char **argv){
   double prec = std::strtod(argv[4], NULL);
   double error = std::strtod(argv[5], NULL);
   std::vector<float> res = find_roots(a, b, find, prec, error);
-  for (int ii = 0; ii<res.size(); ii++)
-    std::cout << res[ii]<< std::endl;
+  for (int ii = 0; ii<res.size(); ii++){
+    std::cout << res[ii];
+    if (ii!=(res.size()-1))
+	std::cout << " ";    
+    else
+	std::cout << std::endl;   
+  }
 
   return 0;
 }
